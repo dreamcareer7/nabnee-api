@@ -1,0 +1,75 @@
+mongoexport --host localhost --db captionplus --collection captions --type=csv --out captext.csv --fields caption_id,category,caption,image_url,contributor,tags
+
+mongoexport --db captionplus --collection captions --out captions.json
+mongoimport --db captionplus --collection captions --file captions.json
+
+
+mongoimport --db master --collection contents --file content.json
+
+
+mongoexport --db crumblyy --collection hacks --out hacks.json
+
+//Tapri db
+
+mongoexport --port 28982 --db master --collection contents --out content.json
+
+mongoimport --db captionplus --collection categories --type csv --file category_upload.csv --headerline
+
+split -l 10000 user_id.json output_prefix **--splits file into small chunks--**
+
+for file in *; do mv "$file" "${file%}.json"; done **--change all file extensions at once
+
+ node --max-old-space-size=8192 app.js//increase memory limit for nodejs
+
+
+
+ db.users.findOneAndUpdate({'user_id': ObjectId(ueE5Qsqx4tbVVZ7ZN8ePQhcpIs52)},
+                                        { $addToSet: { user_favourites: "-LLhaN0a8zhQuEAfOfxQ"} })
+
+db.users.findOneAndUpdate({"username": "Bk7k8VJ8jN"},{ $addToSet: { "permissions": "CREATE-END-CLIENT"} })
+
+ db.captions.updateMany({'contributor':'Editor'},{$set:{'contributor_link':'captionplusapp'}}) //  Update entire document on one 
+
+
+
+db.contents.updateMany({'category_name':'राजनी'},{$set:{'content_type':'HCK_TXT'}})
+
+
+db.students.updateMany( {}, { $rename: { "nmae": "name" } } ) // rename a field in mongo db document
+
+//---Get data uploaded in the past 1 hour----------------------------------------
+db.contents.find({"created_at":{$gt:new Date(Date.now() - 1*60*60 * 1000)}}).count()
+
+//Remove data uploaded in the past 1 hour----------------------------------------
+db.contents.remove({"created_at":{$gt:new Date(Date.now() - 1*60*60 * 1000)}})
+
+
+
+//----sh file commands for mongo export-----------
+#backup captionplus db
+mongoexport --db captionplus --collection captions --out 242019/captions.json
+mongoexport --db captionplus --collection users --out 242019/users.json
+mongoexport --db captionplus --collection subcategories --out 242019/subcategories.json
+mongoexport --db captionplus --collection stories --out 242019/stories.json
+mongoexport --db captionplus --collection premium_user_slabs --out 242019/premium_user_slabs.json
+mongoexport --db captionplus --collection lead_contributors --out 242019/lead_contributors.json
+mongoexport --db captionplus --collection hashtags --out 242019/hashtags.json
+mongoexport --db captionplus --collection hashtag_contributors --out 242019/hashtag_contributors.json
+mongoexport --db captionplus --collection hashtag_categories --out 242019/hashtag_categories.json
+mongoexport --db captionplus --collection hacks --out 242019/hacks.json
+mongoexport --db captionplus --collection hack_categories --out 242019/hack_categories.json
+mongoexport --db captionplus --collection categories --out 242019/categories.json
+
+
+
+//----Copy files from server to local machine
+scp file_to_transfer.txt root@remotehost.com:/directory_to_drop_file/location/
+
+//Copy folder from server to local machine
+scp -r nameOfFolderToCopy username@ipaddress:/path/to/copy/
+
+scp -r 842019 /ubuntu@13.233.216.156:/Users/anuragkumar/Desktop/Projects/CaptionPlus_Backup
+
+.find().or([{ project_name: project_name }, { project_name_ar: project_name_ar }])
+
+.find({"status" : "approved"}).or([{ "business_category_name" : { $regex: business_category_name, $options: 'i' }}, { "business_category_name_ar" : { $regex: business_category_name, $options: 'i' }}])

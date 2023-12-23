@@ -1,0 +1,24 @@
+name: Automate Deploy to Amazon EC2 using Github actions
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+      - run: |
+          echo "Deploying changes..."
+          commit_hash=`git rev-parse HEAD`
+          aws deploy create-deployment \
+          --application-name nabnee-api-deploy \
+          --deployment-group-name nabnee-api-dmgroup \
+          --deployment-config-name CodeDeployDefault.OneAtATime \
+          --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash
